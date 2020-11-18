@@ -12,7 +12,6 @@ analyzer:
     - "test/generate/**"
     - "lib/generated/**"
     - "lib/**/*.g.dart"
-    - "lib/**/*.freezed.dart"
     - "lib/**/*.chopper.dart"
 
 linter:
