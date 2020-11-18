@@ -2,14 +2,36 @@ import 'package:flutter/material.dart';
 
 void main()
 {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: HomePage(),
+    );
+  }
+}
+
+
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<HomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  String textFormValue;
+  double convertedValue;
+  double rate = 4.5;
+  bool onlyNumbersCheck = false;
 
   bool _isNumeric(String str) {
     if(str == null) {
@@ -40,6 +62,9 @@ class MyApp extends StatelessWidget {
               child: Form(
                 key: _formKey,
                 child: TextFormField(
+                  onChanged: (String value) {
+                    textFormValue =  value;
+                  },
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     hintText: 'Enter the amount of money in EUR',
@@ -59,11 +84,25 @@ class MyApp extends StatelessWidget {
             ),
             FlatButton(
                 onPressed: () {
-                  if(_formKey.currentState.validate()) {
-                  }
+                  setState(() {
+                      if(_formKey.currentState.validate()) {
+                        onlyNumbersCheck = true;
+                        convertedValue = double.parse(textFormValue) * rate;
+                      }
+                      else {
+                        onlyNumbersCheck = false;
+                      }
+                    }
+                  );
                 },
                 child: const Text('Convert!'),
                 color: Colors.grey[300],
+            ),
+            Text(
+              onlyNumbersCheck ? '$convertedValue RON' : '',
+              style: const TextStyle(
+                fontSize: 25.0
+              ),
             ),
           ],
         ),
