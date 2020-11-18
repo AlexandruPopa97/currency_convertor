@@ -1,6 +1,6 @@
 # currency_convertor
 
-This app cand convert EUR to LEI
+This app can convert EUR to LEI
 
 ## Getting Started
 
