@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main()
-{
+void main() {
   runApp(const MyApp());
 }
 
@@ -15,8 +14,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -34,7 +31,7 @@ class _MyAppState extends State<HomePage> {
   bool onlyNumbersCheck = false;
 
   bool _isNumeric(String str) {
-    if(str == null) {
+    if (str == null) {
       return false;
     }
     return double.tryParse(str) != null;
@@ -63,7 +60,7 @@ class _MyAppState extends State<HomePage> {
                 key: _formKey,
                 child: TextFormField(
                   onChanged: (String value) {
-                    textFormValue =  value;
+                    textFormValue = value;
                   },
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -71,11 +68,10 @@ class _MyAppState extends State<HomePage> {
                   ),
                   // ignore: missing_return
                   validator: (String value) {
-                    if(!_isNumeric(value)) {
-                        // ignore: unnecessary_parenthesis
-                        return('Please enter a number');
-                      }
-                    else {
+                    if (!_isNumeric(value)) {
+                      // ignore: unnecessary_parenthesis
+                      return ('Please enter a number');
+                    } else {
                       return null;
                     }
                   },
@@ -83,26 +79,22 @@ class _MyAppState extends State<HomePage> {
               ),
             ),
             FlatButton(
-                onPressed: () {
-                  setState(() {
-                      if(_formKey.currentState.validate()) {
-                        onlyNumbersCheck = true;
-                        convertedValue = double.parse(textFormValue) * rate;
-                      }
-                      else {
-                        onlyNumbersCheck = false;
-                      }
-                    }
-                  );
-                },
-                child: const Text('Convert!'),
-                color: Colors.grey[300],
+              onPressed: () {
+                setState(() {
+                  if (_formKey.currentState.validate()) {
+                    onlyNumbersCheck = true;
+                    convertedValue = double.parse(textFormValue) * rate;
+                  } else {
+                    onlyNumbersCheck = false;
+                  }
+                });
+              },
+              child: const Text('Convert!'),
+              color: Colors.grey[300],
             ),
             Text(
               onlyNumbersCheck ? '$convertedValue RON' : '',
-              style: const TextStyle(
-                fontSize: 25.0
-              ),
+              style: const TextStyle(fontSize: 25.0),
             ),
           ],
         ),
